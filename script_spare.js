@@ -1,9 +1,7 @@
- var counter = -1;
  var dataArray = [];
- var dataArray_radar = [];
      d3.csv("/scores.csv", function(data) {
        data.forEach(function(d) {
-           counter++;
+   
            var name = d.name;
            console.log("NAME: " + name);
 
@@ -171,53 +169,8 @@
                 final_property_score: (final_job_score*job_weight) + (final_health_score*health_weight) + (final_edu_score*edu_weight) + (final_community_score*community_weight)
             }
             dataArray.push(property);
-
-            //Prep data for chart
-            var temp_dataArray_radar = [];
-            
-               var property_radar = [];
-               var job = {
-                   axis: "Jobs",
-                   value: final_job_score/100
-               }
-       
-               var health = {
-                   axis: "Health",
-                   value: final_health_score/100
-               }
-       
-               var edu = {
-                   axis: "Education",
-                   value: final_edu_score/100
-               }
-       
-               var transport = {
-                   axis: "Transportation",
-                   value: final_transport_score/100
-               }
-       
-               var community = {
-                   axis: "Community",
-                   value: final_community_score/100
-               }
-               property_radar.push(job);
-               property_radar.push(health);
-               property_radar.push(edu);
-               property_radar.push(transport);
-               property_radar.push(community);
-               temp_dataArray_radar.push(property_radar);
-               dataArray_radar.push(property_radar);
-               var unit_name = "unit_" + counter; 
-               var unit = document.getElementById(unit_name);
-               //Make chart
-               RadarChart(unit, temp_dataArray_radar, radarChartOptionsSmall);
-            
      });
      console.log("FINAL DATA ARRAY: " + dataArray);
-     console.log("FINAL RADAR DATA ARRAY: " + dataArray_radar);
-     //Big chart
-RadarChart("#together-chart", dataArray_radar, radarChartOptionsBig);
-console.log("I drew a big chart!");
      });
 
     
@@ -272,14 +225,10 @@ console.log("I drew a big chart!");
 			//////////////////// Draw the Chart ////////////////////////// 
 			////////////////////////////////////////////////////////////// 
 
-            //#EDC951","#CC333F","#00A0B0
 			var color = d3.scale.ordinal()
-                .range(["#c1ff00", "0002e8", "ff8d00", "0ce898", "ff00a2"]);
-                
-            var aui_color = d3.scale.ordinal()
-				.range(["#ff8d00"]);
+				.range(["#EDC951","#CC333F","#00A0B0"]);
 				
-			var radarChartOptionsBig = {
+			var radarChartOptions = {
 			  w: width,
 			  h: height,
 			  margin: margin,
@@ -296,25 +245,65 @@ console.log("I drew a big chart!");
                 maxValue: 0.5,
                 levels: 5,
                 roundStrokes: true,
-                color: aui_color
+                color: color
               };
     
               
 
+              var dataArray_radar = [];
+     //Prep dataArray for radar chart
+     for(var i = 0; i < 2; i++){
+         var property = dataArray[i];
+        var property_radar = [];
+        var job = {
+            axis: "Jobs",
+            value: property.final_job_score/100
+        }
+
+        var health = {
+            axis: "Health",
+            value: property.final_health_score/100
+        }
+
+        var edu = {
+            axis: "Education",
+            value: property.final_edu_score/100
+        }
+
+        var transport = {
+            axis: "Transportation",
+            value: property.final_transport_score/100
+        }
+
+        var community = {
+            axis: "Community",
+            value: property.final_community_score/100
+        }
+        property_radar.push(job);
+        property_radar.push(health);
+        property_radar.push(edu);
+        property_radar.push(transport);
+        property_radar.push(community);
+        dataArray_radar.push(property_radar);
+        RadarChart("#together-chart", dataArray_radar, radarChartOptions);
+     }
+
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
 
-
+//Big chart
+RadarChart("#together-chart", data, radarChartOptions);
+console.log("I drew a big chart!");
 
 //Small charts
-/*for(var c = 0; c < 3; c++){
+for(var c = 0; c < 3; c++){
     var col = document.getElementsByClassName('column')[c];
     for(var u = 0; u < 6; u++){
         var cell = col.getElementsByClassName('chart-unit')[u];
         RadarChart(cell, data, radarChartOptionsSmall);
         console.log("I drew a small chart!");
     }
-}*/
+}
 
 
 
