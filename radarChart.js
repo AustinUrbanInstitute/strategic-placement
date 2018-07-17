@@ -29,10 +29,19 @@ function RadarChart(id, data, options) {
 	  }//for i
 	}//if
 	
-	//If the supplied maxValue is smaller than the actual one, replace by the max in the data
-	var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
+	//Max value 100%
+	var maxValue = 1;
 		
-	var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
+	//Pull name from axis, hide name
+	var name = "";
+
+	var allAxis = (data[0].map(function(i, j){
+		var full_axis = String(i.axis);
+		var index = full_axis.indexOf('_');
+		name = full_axis.substring(0, index);
+		var short_axis = full_axis.substring(index+1);
+		return short_axis;
+	})),	//Names of each axis
 		total = allAxis.length,					//The number of different axes
 		radius = Math.min(cfg.w/2, cfg.h/2), 	//Radius of the outermost circle
 		Format = d3.format('%'),			 	//Percentage formatting
@@ -167,13 +176,21 @@ function RadarChart(id, data, options) {
 			//Bring back the hovered over blob
 			d3.select(this)
 				.transition().duration(200)
-				.style("fill-opacity", 0.7);	
+				.style("fill-opacity", 0.7);
+						
+			tooltip
+				//Property name on hover NOT WORKING IDK WHY
+				.text(name)
+				.transition().duration(200)
+				.style('opacity', 1)
+				.style('font-size', '20px');	
 		})
 		.on('mouseout', function(){
 			//Bring back all blobs
 			d3.selectAll(".radarArea")
 				.transition().duration(200)
 				.style("fill-opacity", cfg.opacityArea);
+		
 		});
 		
 	//Create the outlines	
@@ -225,7 +242,8 @@ function RadarChart(id, data, options) {
 				.attr('y', newY)
 				.text(Format(d.value))
 				.transition().duration(200)
-				.style('opacity', 1);
+				.style('opacity', 1)
+				.style('font-size', '20px');
 		})
 		.on("mouseout", function(){
 			tooltip.transition().duration(200)

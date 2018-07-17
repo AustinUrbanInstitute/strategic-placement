@@ -177,17 +177,17 @@
             
                var property_radar = [];
                var job = {
-                   axis: "Jobs",
+                   axis: name + "_" + "Jobs",
                    value: final_job_score/100
                }
        
                var health = {
-                   axis: "Health",
+                   axis: name + "_" + "Health",
                    value: final_health_score/100
                }
        
                var edu = {
-                   axis: "Education",
+                   axis: name + "_" + "Education",
                    value: final_edu_score/100
                }
        
@@ -200,6 +200,7 @@
                    axis: "Community",
                    value: final_community_score/100
                }
+
                property_radar.push(job);
                property_radar.push(health);
                property_radar.push(edu);
@@ -211,6 +212,14 @@
                var unit = document.getElementById(unit_name);
                //Make chart
                RadarChart(unit, temp_dataArray_radar, radarChartOptionsSmall);
+               //Add chart title
+               var title_name = "title_" + counter; 
+               var title = document.getElementById(title_name);
+               title.innerHTML = name;
+               //Add overall score
+               var score_name = "score_" + counter; 
+               var score = document.getElementById(score_name);
+               score.innerHTML = "Overall score: " + Math.round(final_property_score);
             
      });
      console.log("FINAL DATA ARRAY: " + dataArray);
@@ -228,7 +237,7 @@ console.log("I drew a big chart!");
 			//////////////////////// Set-Up ////////////////////////////// 
 			////////////////////////////////////////////////////////////// 
 
-			var margin = {top: 100, right: 100, bottom: 100, left: 100},
+			var margin = {top: 70, right: 100, bottom: 100, left: 100},
 				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
 				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 					
