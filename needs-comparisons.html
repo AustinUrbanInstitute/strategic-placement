@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HACA Property Scores</title>
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="flex-grid.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        /*EDIT FLEXGRID*/
+
+        .column {
+            flex: 25%;
+            max-width: 25%;
+            padding: 0 0px;
+        }
+
+        .chart-unit {
+            background-color: white;
+            min-width: 100%;
+            min-height: 300px;
+            margin-top: 8px;
+            vertical-align: middle;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .column-title {
+            position: fixed;
+            text-align: center;
+            background-color: white;
+            width: 25vw;
+            padding: 15px;
+            margin-top: -20px;
+        }
+
+        .tooltiptext {
+            visibility: hidden;
+            width: 270px;
+            background-color: #f7f7f7;
+            color: #000000;
+            text-align: left;
+            padding: 10px;
+            font-size: 17px;
+
+            /* Position the tooltip */
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 30%;
+            margin-left: -60px;
+        }
+
+        .column-title:hover .tooltiptext {
+            visibility: visible;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="legend-bar">
+        <div class="legend-item">
+            <a href="/index.html">All Properties</a>
+        </div>
+        <div class="legend-item">
+            <a href="/needs-index.html">Properties Needs</a>
+        </div>
+        <div class="legend-item">
+            <a href="/quiz.html">Placement Quiz</a>
+        </div>
+        <div class="legend-item">
+            <a href="/profile-comparisons.html">Profile Comparisons</a>
+        </div>
+        <div class="legend-item"></div>
+        <div class="legend-item">
+            <div class="legend-square" id="square1"></div>
+            <h1 class="legend-text">Resident Needs</h1>
+        </div>
+
+        <div class="legend-item">
+            <div class="legend-square" id="square2"></div>
+            <h1 class="legend-text">Property Scores</h1>
+        </div>
+    </div>
+    <div id="body">
+        <!--<div>
+            <h1 class="main-title" id="title_together">Profile Comparisons</h1>
+        </div>-->
+
+        <div class="row">
+            <div class="column" id="profile_0">
+                <div class="column-title" id="title_together">Untailored Scoring</div>
+                <p class="column-ranks"></p>
+                <div class="chart-unit" id="unit_0">
+                    <h1 class="chart-unit-title" id="title_0"></h1>
+                    <h1 class="chart-unit-score" id="score_0"></h1>
+                </div>
+                <div class="chart-unit" id="unit_1">
+                    <h1 class="chart-unit-title" id="title_1"></h1>
+                    <h1 class="chart-unit-score" id="score_1"></h1>
+                </div>
+                <div class="chart-unit" id="unit_2">
+                    <h1 class="chart-unit-title" id="title_2"></h1>
+                    <h1 class="chart-unit-score" id="score_2"></h1>
+                </div>
+                <div class="chart-unit" id="unit_3">
+                    <h1 class="chart-unit-title" id="title_3"></h1>
+                    <h1 class="chart-unit-score" id="score_3"></h1>
+                </div>
+                <div class="chart-unit" id="unit_4">
+                    <h1 class="chart-unit-title" id="title_4"></h1>
+                    <h1 class="chart-unit-score" id="score_4"></h1>
+                </div>
+                <div class="chart-unit" id="unit_5">
+                    <h1 class="chart-unit-title" id="title_5"></h1>
+                    <h1 class="chart-unit-score" id="score_5"></h1>
+                </div>
+                <div class="chart-unit" id="unit_6">
+                    <h1 class="chart-unit-title" id="title_6"></h1>
+                    <h1 class="chart-unit-score" id="score_6"></h1>
+                </div>
+                <div class="chart-unit" id="unit_7">
+                    <h1 class="chart-unit-title" id="title_7"></h1>
+                    <h1 class="chart-unit-score" id="score_7"></h1>
+                </div>
+                <div class="chart-unit" id="unit_8">
+                    <h1 class="chart-unit-title" id="title_8"></h1>
+                    <h1 class="chart-unit-score" id="score_8"></h1>
+                </div>
+                <div class="chart-unit" id="unit_9">
+                    <h1 class="chart-unit-title" id="title_9"></h1>
+                    <h1 class="chart-unit-score" id="score_9"></h1>
+                </div>
+                <div class="chart-unit" id="unit_10">
+                    <h1 class="chart-unit-title" id="title_10"></h1>
+                    <h1 class="chart-unit-score" id="score_10"></h1>
+                </div>
+                <div class="chart-unit" id="unit_11">
+                    <h1 class="chart-unit-title" id="title_11"></h1>
+                    <h1 class="chart-unit-score" id="score_11"></h1>
+                </div>
+                <div class="chart-unit" id="unit_12">
+                    <h1 class="chart-unit-title" id="title_12"></h1>
+                    <h1 class="chart-unit-score" id="score_12"></h1>
+                </div>
+                <div class="chart-unit" id="unit_13">
+                    <h1 class="chart-unit-title" id="title_13"></h1>
+                    <h1 class="chart-unit-score" id="score_13"></h1>
+                </div>
+                <div class="chart-unit" id="unit_14">
+                    <h1 class="chart-unit-title" id="title_14"></h1>
+                    <h1 class="chart-unit-score" id="score_14"></h1>
+                </div>
+                <div class="chart-unit" id="unit_15">
+                    <h1 class="chart-unit-title" id="title_15"></h1>
+                    <h1 class="chart-unit-score" id="score_15"></h1>
+                </div>
+                <div class="chart-unit" id="unit_16">
+                    <h1 class="chart-unit-title" id="title_16"></h1>
+                    <h1 class="chart-unit-score" id="score_16"></h1>
+                </div>
+                <div class="chart-unit" id="unit_17">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+                <div class="chart-unit" id="unit_18">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+            </div>
+            <div class="column" id="profile_1">
+                <div class="column-title" id="title_together">Profile 1: Single Working Parent
+                    <span class="tooltiptext">
+                        <ul>
+                            <li>Female, has 2 kids</li>
+                            <li>Takes public transport for job and everyday transport</li>
+                            <li>Vists doctor 4 times a year</li>
+                            <li>Goes to park often with kids</li>
+                            <li>Visits library every other week</li>
+                            <li>Grocery shops once a week</li>
+                        </ul>
+                    </span>
+                </div>
+                <p class="column-ranks"></p>
+                <div class="chart-unit" id="unit_0">
+                    <h1 class="chart-unit-title" id="title_0"></h1>
+                    <h1 class="chart-unit-score" id="score_0"></h1>
+                </div>
+                <div class="chart-unit" id="unit_1">
+                    <h1 class="chart-unit-title" id="title_1"></h1>
+                    <h1 class="chart-unit-score" id="score_1"></h1>
+                </div>
+                <div class="chart-unit" id="unit_2">
+                    <h1 class="chart-unit-title" id="title_2"></h1>
+                    <h1 class="chart-unit-score" id="score_2"></h1>
+                </div>
+                <div class="chart-unit" id="unit_3">
+                    <h1 class="chart-unit-title" id="title_3"></h1>
+                    <h1 class="chart-unit-score" id="score_3"></h1>
+                </div>
+                <div class="chart-unit" id="unit_4">
+                    <h1 class="chart-unit-title" id="title_4"></h1>
+                    <h1 class="chart-unit-score" id="score_4"></h1>
+                </div>
+                <div class="chart-unit" id="unit_5">
+                    <h1 class="chart-unit-title" id="title_5"></h1>
+                    <h1 class="chart-unit-score" id="score_5"></h1>
+                </div>
+                <div class="chart-unit" id="unit_6">
+                    <h1 class="chart-unit-title" id="title_6"></h1>
+                    <h1 class="chart-unit-score" id="score_6"></h1>
+                </div>
+                <div class="chart-unit" id="unit_7">
+                    <h1 class="chart-unit-title" id="title_7"></h1>
+                    <h1 class="chart-unit-score" id="score_7"></h1>
+                </div>
+                <div class="chart-unit" id="unit_8">
+                    <h1 class="chart-unit-title" id="title_8"></h1>
+                    <h1 class="chart-unit-score" id="score_8"></h1>
+                </div>
+                <div class="chart-unit" id="unit_9">
+                    <h1 class="chart-unit-title" id="title_9"></h1>
+                    <h1 class="chart-unit-score" id="score_9"></h1>
+                </div>
+                <div class="chart-unit" id="unit_10">
+                    <h1 class="chart-unit-title" id="title_10"></h1>
+                    <h1 class="chart-unit-score" id="score_10"></h1>
+                </div>
+                <div class="chart-unit" id="unit_11">
+                    <h1 class="chart-unit-title" id="title_11"></h1>
+                    <h1 class="chart-unit-score" id="score_11"></h1>
+                </div>
+                <div class="chart-unit" id="unit_12">
+                    <h1 class="chart-unit-title" id="title_12"></h1>
+                    <h1 class="chart-unit-score" id="score_12"></h1>
+                </div>
+                <div class="chart-unit" id="unit_13">
+                    <h1 class="chart-unit-title" id="title_13"></h1>
+                    <h1 class="chart-unit-score" id="score_13"></h1>
+                </div>
+                <div class="chart-unit" id="unit_14">
+                    <h1 class="chart-unit-title" id="title_14"></h1>
+                    <h1 class="chart-unit-score" id="score_14"></h1>
+                </div>
+                <div class="chart-unit" id="unit_15">
+                    <h1 class="chart-unit-title" id="title_15"></h1>
+                    <h1 class="chart-unit-score" id="score_15"></h1>
+                </div>
+                <div class="chart-unit" id="unit_16">
+                    <h1 class="chart-unit-title" id="title_16"></h1>
+                    <h1 class="chart-unit-score" id="score_16"></h1>
+                </div>
+                <div class="chart-unit" id="unit_17">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+                <div class="chart-unit" id="unit_18">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+            </div>
+            <div class="column" id="profile_2">
+                <div class="column-title" id="title_together">
+                    Profile 2: Retired Couple
+                    <span class="tooltiptext">
+                        <ul>
+                            <li>Elderly couple, retired</li>
+                            <li>Disability</li>
+                            <li>Visits doctor 2 times a month</li>
+                            <li>Prefers walking as main transportation mode</li>
+                            <li>Visits park almost every day</li>
+                            <li>Goes to library 2 times a week</li>
+                            <li>Grocery shops 3 times a week</li>
+                        </ul>
+                    </span>
+                </div>
+                <p class="column-ranks"></p>
+                <div class="chart-unit" id="unit_0">
+                    <h1 class="chart-unit-title" id="title_0"></h1>
+                    <h1 class="chart-unit-score" id="score_0"></h1>
+                </div>
+                <div class="chart-unit" id="unit_1">
+                    <h1 class="chart-unit-title" id="title_1"></h1>
+                    <h1 class="chart-unit-score" id="score_1"></h1>
+                </div>
+                <div class="chart-unit" id="unit_2">
+                    <h1 class="chart-unit-title" id="title_2"></h1>
+                    <h1 class="chart-unit-score" id="score_2"></h1>
+                </div>
+                <div class="chart-unit" id="unit_3">
+                    <h1 class="chart-unit-title" id="title_3"></h1>
+                    <h1 class="chart-unit-score" id="score_3"></h1>
+                </div>
+                <div class="chart-unit" id="unit_4">
+                    <h1 class="chart-unit-title" id="title_4"></h1>
+                    <h1 class="chart-unit-score" id="score_4"></h1>
+                </div>
+                <div class="chart-unit" id="unit_5">
+                    <h1 class="chart-unit-title" id="title_5"></h1>
+                    <h1 class="chart-unit-score" id="score_5"></h1>
+                </div>
+                <div class="chart-unit" id="unit_6">
+                    <h1 class="chart-unit-title" id="title_6"></h1>
+                    <h1 class="chart-unit-score" id="score_6"></h1>
+                </div>
+                <div class="chart-unit" id="unit_7">
+                    <h1 class="chart-unit-title" id="title_7"></h1>
+                    <h1 class="chart-unit-score" id="score_7"></h1>
+                </div>
+                <div class="chart-unit" id="unit_8">
+                    <h1 class="chart-unit-title" id="title_8"></h1>
+                    <h1 class="chart-unit-score" id="score_8"></h1>
+                </div>
+                <div class="chart-unit" id="unit_9">
+                    <h1 class="chart-unit-title" id="title_9"></h1>
+                    <h1 class="chart-unit-score" id="score_9"></h1>
+                </div>
+                <div class="chart-unit" id="unit_10">
+                    <h1 class="chart-unit-title" id="title_10"></h1>
+                    <h1 class="chart-unit-score" id="score_10"></h1>
+                </div>
+                <div class="chart-unit" id="unit_11">
+                    <h1 class="chart-unit-title" id="title_11"></h1>
+                    <h1 class="chart-unit-score" id="score_11"></h1>
+                </div>
+                <div class="chart-unit" id="unit_12">
+                    <h1 class="chart-unit-title" id="title_12"></h1>
+                    <h1 class="chart-unit-score" id="score_12"></h1>
+                </div>
+                <div class="chart-unit" id="unit_13">
+                    <h1 class="chart-unit-title" id="title_13"></h1>
+                    <h1 class="chart-unit-score" id="score_13"></h1>
+                </div>
+                <div class="chart-unit" id="unit_14">
+                    <h1 class="chart-unit-title" id="title_14"></h1>
+                    <h1 class="chart-unit-score" id="score_14"></h1>
+                </div>
+                <div class="chart-unit" id="unit_15">
+                    <h1 class="chart-unit-title" id="title_15"></h1>
+                    <h1 class="chart-unit-score" id="score_15"></h1>
+                </div>
+                <div class="chart-unit" id="unit_16">
+                    <h1 class="chart-unit-title" id="title_16"></h1>
+                    <h1 class="chart-unit-score" id="score_16"></h1>
+                </div>
+                <div class="chart-unit" id="unit_17">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+                <div class="chart-unit" id="unit_18">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+            </div>
+            <div class="column" id="profile_3">
+                <div class="column-title" id="title_together">
+                    Profile 3: Single Working Adult
+                    <span class="tooltiptext">
+                        <ul>
+                            <li>Male, single</li>
+                            <li>Looking for a new job</li>
+                            <li>Willing to drive to job, prefers public transport for transportation</li>
+                            <li>Minor health condition</li>
+                            <li>Visits doctor every other month</li>
+                            <li>Doesn't go to the park</li>
+                            <li>Visits library once a week</li>
+                            <li>Grocery shops twice a month</li>
+                        </ul>
+                    </span>
+                </div>
+                <p class="column-ranks"></p>
+                <div class="chart-unit" id="unit_0">
+                    <h1 class="chart-unit-title" id="title_0"></h1>
+                    <h1 class="chart-unit-score" id="score_0"></h1>
+                </div>
+                <div class="chart-unit" id="unit_1">
+                    <h1 class="chart-unit-title" id="title_1"></h1>
+                    <h1 class="chart-unit-score" id="score_1"></h1>
+                </div>
+                <div class="chart-unit" id="unit_2">
+                    <h1 class="chart-unit-title" id="title_2"></h1>
+                    <h1 class="chart-unit-score" id="score_2"></h1>
+                </div>
+                <div class="chart-unit" id="unit_3">
+                    <h1 class="chart-unit-title" id="title_3"></h1>
+                    <h1 class="chart-unit-score" id="score_3"></h1>
+                </div>
+                <div class="chart-unit" id="unit_4">
+                    <h1 class="chart-unit-title" id="title_4"></h1>
+                    <h1 class="chart-unit-score" id="score_4"></h1>
+                </div>
+                <div class="chart-unit" id="unit_5">
+                    <h1 class="chart-unit-title" id="title_5"></h1>
+                    <h1 class="chart-unit-score" id="score_5"></h1>
+                </div>
+                <div class="chart-unit" id="unit_6">
+                    <h1 class="chart-unit-title" id="title_6"></h1>
+                    <h1 class="chart-unit-score" id="score_6"></h1>
+                </div>
+                <div class="chart-unit" id="unit_7">
+                    <h1 class="chart-unit-title" id="title_7"></h1>
+                    <h1 class="chart-unit-score" id="score_7"></h1>
+                </div>
+                <div class="chart-unit" id="unit_8">
+                    <h1 class="chart-unit-title" id="title_8"></h1>
+                    <h1 class="chart-unit-score" id="score_8"></h1>
+                </div>
+                <div class="chart-unit" id="unit_9">
+                    <h1 class="chart-unit-title" id="title_9"></h1>
+                    <h1 class="chart-unit-score" id="score_9"></h1>
+                </div>
+                <div class="chart-unit" id="unit_10">
+                    <h1 class="chart-unit-title" id="title_10"></h1>
+                    <h1 class="chart-unit-score" id="score_10"></h1>
+                </div>
+                <div class="chart-unit" id="unit_11">
+                    <h1 class="chart-unit-title" id="title_11"></h1>
+                    <h1 class="chart-unit-score" id="score_11"></h1>
+                </div>
+                <div class="chart-unit" id="unit_12">
+                    <h1 class="chart-unit-title" id="title_12"></h1>
+                    <h1 class="chart-unit-score" id="score_12"></h1>
+                </div>
+                <div class="chart-unit" id="unit_13">
+                    <h1 class="chart-unit-title" id="title_13"></h1>
+                    <h1 class="chart-unit-score" id="score_13"></h1>
+                </div>
+                <div class="chart-unit" id="unit_14">
+                    <h1 class="chart-unit-title" id="title_14"></h1>
+                    <h1 class="chart-unit-score" id="score_14"></h1>
+                </div>
+                <div class="chart-unit" id="unit_15">
+                    <h1 class="chart-unit-title" id="title_15"></h1>
+                    <h1 class="chart-unit-score" id="score_15"></h1>
+                </div>
+                <div class="chart-unit" id="unit_16">
+                    <h1 class="chart-unit-title" id="title_16"></h1>
+                    <h1 class="chart-unit-score" id="score_16"></h1>
+                </div>
+                <div class="chart-unit" id="unit_17">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+                <div class="chart-unit" id="unit_18">
+                    <h1 class="chart-unit-title" id="title_17"></h1>
+                    <h1 class="chart-unit-score" id="score_17"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+  <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+  <script type="text/javascript" src="parse.js"></script>-->
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="radarChart3.js"></script>
+<script type="text/javascript" src="needs-comparisons.js"></script>
+
+</html>

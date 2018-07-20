@@ -1,42 +1,6 @@
 var counter = -1;
 var dataArray = [];
 var dataArray_radar = [];
-/*var ideal_radar = [];
-//Ideal values radar (basically a big circle)
-var ideal_job = {
-    axis: name + "_" + "Jobs",
-    value: 1
-}
-
-var ideal_health = {
-    axis: name + "_" + "Health",
-    value: 1
-}
-
-var ideal_edu = {
-    axis: name + "_" + "Education",
-    value: 1
-}
-
-var ideal_transport = {
-    axis: "Transportation",
-    value: 1
-}
-
-var ideal_community = {
-    axis: "Community",
-    value: 1
-}
-
-ideal_radar.push(ideal_job);
-ideal_radar.push(ideal_health);
-ideal_radar.push(ideal_edu);
-ideal_radar.push(ideal_transport);
-ideal_radar.push(ideal_community);
-
-dataArray_radar.push(ideal_radar);
-*/
-
 d3.csv("/scores-profile0.csv", function (data) {
     data.forEach(function (d) {
         counter++;
@@ -228,28 +192,60 @@ d3.csv("/scores-profile0.csv", function (data) {
         var property_radar = [];
         var job = {
             axis: name + "_" + "Jobs",
-            value: final_job_score / 100
+            value: final_job_score*job_weight/100
         }
 
         var health = {
             axis: name + "_" + "Health",
-            value: final_health_score / 100
+            value: final_health_score * health_weight/ 100
         }
 
         var edu = {
             axis: name + "_" + "Education",
-            value: final_edu_score / 100
+            value: final_edu_score * edu_weight/ 100
         }
 
         var transport = {
             axis: "Transportation",
-            value: final_transport_score / 100
+            value: final_transport_score* transport_weight / 100
         }
 
         var community = {
             axis: "Community",
-            value: final_community_score / 100
+            value: final_community_score *community_weight/ 100
         }
+
+        var ideal_radar = [];
+        var ideal_job = {
+            axis: name + "_" + "Jobs",
+            value: job_weight
+        }
+
+        var ideal_health = {
+            axis: name + "_" + "Health",
+            value: health_weight
+        }
+
+        var ideal_edu = {
+            axis: name + "_" + "Education",
+            value: edu_weight
+        }
+
+        var ideal_transport = {
+            axis: "Transportation",
+            value: transport_weight
+        }
+
+        var ideal_community = {
+            axis: "Community",
+            value: community_weight
+        }
+
+        ideal_radar.push(ideal_job);
+        ideal_radar.push(ideal_health);
+        ideal_radar.push(ideal_edu);
+        ideal_radar.push(ideal_transport);
+        ideal_radar.push(ideal_community);
 
         property_radar.push(job);
         property_radar.push(health);
@@ -257,7 +253,7 @@ d3.csv("/scores-profile0.csv", function (data) {
         property_radar.push(transport);
         property_radar.push(community);
 
-        //temp_dataArray_radar.push(ideal_radar);
+        temp_dataArray_radar.push(ideal_radar);
         temp_dataArray_radar.push(property_radar);
 
         dataArray_radar.push(property_radar);
@@ -295,51 +291,15 @@ var margin = { top: 70, right: 100, bottom: 100, left: 100 },
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
 ////////////////////////////////////////////////////////////// 
-////////////////////////// Data ////////////////////////////// 
-////////////////////////////////////////////////////////////// 
-/*
-			var data = [
-					  [//iPhone
-						{axis:"Battery Life",value:0.22},
-						{axis:"Brand",value:0.28},
-						{axis:"Contract Cost",value:0.29},
-						{axis:"Design And Quality",value:0.17},
-						{axis:"Have Internet Connectivity",value:0.22},
-						{axis:"Large Screen",value:0.02},
-						{axis:"Price Of Device",value:0.21},
-						{axis:"To Be A Smartphone",value:0.50}			
-					  ],[//Samsung
-						{axis:"Battery Life",value:0.27},
-						{axis:"Brand",value:0.16},
-						{axis:"Contract Cost",value:0.35},
-						{axis:"Design And Quality",value:0.13},
-						{axis:"Have Internet Connectivity",value:0.20},
-						{axis:"Large Screen",value:0.13},
-						{axis:"Price Of Device",value:0.35},
-						{axis:"To Be A Smartphone",value:0.38}
-					  ],[//Nokia Smartphone
-						{axis:"Battery Life",value:0.26},
-						{axis:"Brand",value:0.10},
-						{axis:"Contract Cost",value:0.30},
-						{axis:"Design And Quality",value:0.14},
-						{axis:"Have Internet Connectivity",value:0.22},
-						{axis:"Large Screen",value:0.04},
-						{axis:"Price Of Device",value:0.41},
-						{axis:"To Be A Smartphone",value:0.30}
-					  ]
-                    ];
-                    
-            */
-////////////////////////////////////////////////////////////// 
 //////////////////// Draw the Chart ////////////////////////// 
 ////////////////////////////////////////////////////////////// 
 
 //#EDC951","#CC333F","#00A0B0
 var color = d3.scale.ordinal()
-    .range(["#909090", "#c1ff00", "0002e8", "ff8d00", "0ce898", "ff00a2"]);
+    .range(["#c1ff00", "0002e8", "ff8d00", "0ce898", "ff00a2"]);
 
 var aui_color = d3.scale.ordinal()
-    .range(["#909090", "#ff8d00"]);
+    .range(["#0002e8", "#ff8d00"]);
 
 var radarChartOptionsBig = {
     w: width,
@@ -351,15 +311,32 @@ var radarChartOptionsBig = {
     color: color
 };
 
-var w = 250
-var h = w;
-
 var radarChartOptionsSmall = {
-    w: w,
-    h: h,
+    w: 250,
+    h: 250,
     margin: margin,
     maxValue: 0.5,
     levels: 5,
     roundStrokes: true,
     color: aui_color
 };
+
+
+
+//Call function to draw the Radar chart
+//Will expect that data is in %'s
+
+
+
+//Small charts
+/*for(var c = 0; c < 3; c++){
+   var col = document.getElementsByClassName('column')[c];
+   for(var u = 0; u < 6; u++){
+       var cell = col.getElementsByClassName('chart-unit')[u];
+       RadarChart(cell, data, radarChartOptionsSmall);
+       console.log("I drew a small chart!");
+   }
+}*/
+
+
+
