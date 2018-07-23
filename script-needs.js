@@ -25,19 +25,11 @@ d3.csv("/scores-needs0.csv", function (data) {
 
         var property_radar = [
             {
-                axis: name + "_" + "Jobs",
+                axis: name + "_" + "Job Opportunity",
                 value: d.final_job_score / 100
             },
 
-            {
-                axis: name + "_" + "Health",
-                value: d.final_health_score / 100
-            },
-
-            {
-                axis: name + "_" + "Education",
-                value: d.final_edu_score / 100
-            },
+        
 
             {
                 axis: "Public Transit",
@@ -54,16 +46,25 @@ d3.csv("/scores-needs0.csv", function (data) {
                 value: d.safety / 100
             },
             {
-                axis: "Parks",
-                value: d.park / 100
+                axis: name + "_" + "Health",
+                value: d.final_health_score / 100
             },
+            {
+                axis: name + "_" + "Education",
+                value: d.final_edu_score / 100
+            },
+            {
+                axis: "Groceries",
+                value: d.grocery / 100
+            },
+        
             {
                 axis: "Libraries",
                 value: d.library / 100
             },
             {
-                axis: "Groceries",
-                value: d.grocery / 100
+                axis: "Parks",
+                value: d.park / 100
             }
 
         ];

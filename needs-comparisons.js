@@ -83,20 +83,9 @@ d3.csv("scores-needs0.csv", function (data) {
 
         var property_radar_standard = [
             {
-                axis: name + "_" + "Jobs",
+                axis: name + "_" + "Job Opportunity",
                 value: d.final_job_score / 100
             },
-
-            {
-                axis: name + "_" + "Health",
-                value: d.final_health_score / 100
-            },
-
-            {
-                axis: name + "_" + "Education",
-                value: d.final_edu_score / 100
-            },
-
             {
                 axis: name + "_" + "Public Transit",
                 value: d.public_transit_score / 100
@@ -107,25 +96,35 @@ d3.csv("scores-needs0.csv", function (data) {
                 value: d.mobility_score / 100
             },
 
+
             {
-                axis:  name + "_" + "Safety",
+                axis: name + "_" + "Safety",
                 value: d.safety / 100
             },
             {
-                axis:name + "_" + "Parks",
-                value: d.park / 100
+                axis: name + "_" + "Health",
+                value: d.final_health_score / 100
             },
+
+            {
+                axis: name + "_" + "Education",
+                value: d.final_edu_score / 100
+            },
+            {
+                axis: name + "_" + "Groceries",
+                value: d.grocery / 100
+            }, 
             {
                 axis: name + "_" + "Libraries",
                 value: d.library / 100
             },
             {
-                axis: name + "_" + "Groceries",
-                value: d.grocery / 100
+                axis: name + "_" + "Parks",
+                value: d.park / 100
             }
 
         ];
-        
+
         temp_dataArray_radar.push(property_radar_standard);
         standard_properties.push(property_radar_standard);
 
@@ -189,46 +188,41 @@ d3.csv("scores-needs1.csv", function (data) {
 
         var property_radar = [
             {
-                axis: name + "_" + "Jobs",
-                value: d.job_need 
+                axis: name + "_" + "Job Opportunity",
+                value: d.job_need
             },
-
-            {
-                axis: name + "_" + "Health",
-                value: d.health_need
-            },
-
-            {
-                axis: name + "_" + "Education",
-                value: d.edu_need
-            },
-
             {
                 axis: name + "_" + "Public Transit",
                 value: d.public_transport_need
             },
-
             {
                 axis: name + "_" + "Mobility",
                 value: d.mobility_need
             },
-
             {
-                axis:  name + "_" + "Safety",
+                axis: name + "_" + "Health",
+                value: d.health_need
+            },
+            {
+                axis: name + "_" + "Safety",
                 value: d.safety_need
             },
             {
-                axis: name + "_" + "Parks",
-                value: d.park_need
+                axis: name + "_" + "Education",
+                value: d.edu_need
+            },
+            {
+                axis: name + "_" + "Groceries",
+                value: d.grocery_need
             },
             {
                 axis: name + "_" + "Libraries",
                 value: d.library_need
             },
             {
-                axis: name + "_" + "Groceries",
-                value: d.grocery_need
-            }
+                axis: name + "_" + "Parks",
+                value: d.park_need
+            },
         ];
 
         temp_dataArray_radar.push(standard_properties[counter]);
@@ -236,7 +230,7 @@ d3.csv("scores-needs1.csv", function (data) {
         dataArray_radar.push(property_radar);
 
         //Store all data in single property object
-        var property = { 
+        var property = {
             name: name,
             preference: preference,
             address: address,
@@ -315,46 +309,41 @@ d3.csv("scores-needs2.csv", function (data) {
 
         var property_radar = [
             {
-                axis: name + "_" + "Jobs",
-                value: d.job_need 
+                axis: name + "_" + "Job Opportunity",
+                value: d.job_need
             },
-
-            {
-                axis: name + "_" + "Health",
-                value: d.health_need
-            },
-
-            {
-                axis: name + "_" + "Education",
-                value: d.edu_need
-            },
-
             {
                 axis: name + "_" + "Public Transit",
                 value: d.public_transport_need
             },
-
             {
                 axis: name + "_" + "Mobility",
                 value: d.mobility_need
             },
-
             {
-                axis:  name + "_" + "Safety",
-                value: d.safety_need
+                axis: name + "_" + "Health",
+                value: d.health_need
             },
             {
-                axis: name + "_" + "Parks",
-                value: d.park_need
+                axis: name + "_" + "Safety",
+                value: safety_need
+            },
+            {
+                axis: name + "_" + "Education",
+                value: d.edu_need
+            },
+            {
+                axis: name + "_" + "Groceries",
+                value: d.grocery_need
             },
             {
                 axis: name + "_" + "Libraries",
                 value: d.library_need
             },
             {
-                axis: name + "_" + "Groceries",
-                value: d.grocery_need
-            }
+                axis: name + "_" + "Parks",
+                value: d.park_need
+            },
         ];
 
         temp_dataArray_radar.push(standard_properties[counter]);
@@ -362,7 +351,7 @@ d3.csv("scores-needs2.csv", function (data) {
         dataArray_radar.push(property_radar);
 
         //Store all data in single property object
-        var property = { 
+        var property = {
             name: name,
             preference: preference,
             address: address,
@@ -441,19 +430,11 @@ d3.csv("scores-needs3.csv", function (data) {
 
         var property_radar = [
             {
-                axis: name + "_" + "Jobs",
-                value: d.job_need 
+                axis: name + "_" + "Job Opportunity",
+                value: d.job_need
             },
 
-            {
-                axis: name + "_" + "Health",
-                value: d.health_need
-            },
-
-            {
-                axis: name + "_" + "Education",
-                value: d.edu_need
-            },
+    
 
             {
                 axis: name + "_" + "Public Transit",
@@ -464,23 +445,33 @@ d3.csv("scores-needs3.csv", function (data) {
                 axis: name + "_" + "Mobility",
                 value: d.mobility_need
             },
+            
+            {
+                axis: name + "_" + "Health",
+                value: d.health_need
+            },
 
             {
-                axis:  name + "_" + "Safety",
+                axis: name + "_" + "Safety",
                 value: d.safety_need
             },
             {
-                axis: name + "_" + "Parks",
-                value: d.park_need
+                axis: name + "_" + "Education",
+                value: d.edu_need
+            },
+            {
+                axis: name + "_" + "Groceries",
+                value: d.grocery_need
             },
             {
                 axis: name + "_" + "Libraries",
                 value: d.library_need
             },
             {
-                axis: name + "_" + "Groceries",
-                value: d.grocery_need
+                axis: name + "_" + "Parks",
+                value: d.park_need
             }
+    
         ];
 
         temp_dataArray_radar.push(standard_properties[counter]);
@@ -488,7 +479,7 @@ d3.csv("scores-needs3.csv", function (data) {
         dataArray_radar.push(property_radar);
 
         //Store all data in single property object
-        var property = { 
+        var property = {
             name: name,
             preference: preference,
             address: address,
@@ -597,68 +588,83 @@ function rank_top_five_match(dataArray, col) {
                 max_position = i;
             }
         }
-        rank_line = (x + 1) + ". " + tempArray[max_position].name + " " + Math.round(tempArray[max_position].match_score*100) + "<br>";
+        rank_line = (x + 1) + ". " + tempArray[max_position].name + " " + Math.round(tempArray[max_position].match_score * 100) + "<br>";
         rank_text.innerHTML = rank_text.innerHTML + rank_line;
         tempArray[max_position].match_score = 0;
     }
 }
 
-function calcMatchScore(property_needs, property_standards){
-    var max_score = calcMaxScore(property_needs);
-    var overlap_score = calcOverlapScore(property_needs, property_standards);
-    console.log("MATCH SCORE: " + overlap_score/max_score);
-    return overlap_score/max_score;
-}
-
-function calcMaxScore(property_needs){
+function calcMatchScore(property_needs, property_standards) {
+    //Uncomment for overlap
+    //var max_score = calcMaxScore(property_needs);
+    //var overlap_score = calcOverlapScore(property_needs, property_standards);
+    //console.log("MATCH SCORE: " + overlap_score / max_score);
+    //return overlap_score / max_score;
     var score = 0;
     for(var i = 0; i < property_needs.length; i++){
+        var need = property_needs[i].value; //0, .25, .5, .75, 1
+        var standard = property_standards[i].value; //0-100
+        if(need == 0){
+            score = score + 1;
+        } else{
+            //Allow overflow
+            score = score + (standard/need);
+        }
+        
+    }
+    //max score is 9
+    return score/9;
+}
+
+function calcMaxScore(property_needs) {
+    var score = 0;
+    for (var i = 0; i < property_needs.length; i++) {
         var side_a = property_needs[i].value;
         var side_b = 0;
-        if(i == property_needs.length-1){ //If last, use first as next side
+        if (i == property_needs.length - 1) { //If last, use first as next side
             side_b = property_needs[0].value;
-        } else{ 
-            side_b = property_needs[i+1].value
+        } else {
+            side_b = property_needs[i + 1].value
         }
-        score = score + 0.5 * side_a * side_b * Math.sin(40 * Math.PI / 180); 
+        score = score + 0.5 * side_a * side_b * Math.sin(40 * Math.PI / 180);
         console.log("PARTIAL SCORE: " + score);
     }
     console.log("MAX SCORE: " + score);
     return score;
 }
 
-function calcOverlapScore(property_needs, property_standards){
+function calcOverlapScore(property_needs, property_standards) {
     var score = 0;
-    for(var i = 0; i < property_standards.length; i++){
+    for (var i = 0; i < property_standards.length; i++) {
         console.log("Calculating between: " + property_needs[i].axis + " & axis clockwise");
         var side_a = 0;
-        if(property_needs[i].value <= property_standards[i].value){
+        if (property_needs[i].value <= property_standards[i].value) {
             side_a = property_needs[i].value;
             console.log("Use needs value");
-        } else{
+        } else {
             side_a = property_standards[i].value;
             console.log("Use standard value");
         }
 
         var side_b = 0;
-        if(i == property_standards.length-1){ //If last, use first as next side
-            if(property_needs[0].value <= property_standards[0].value){
+        if (i == property_standards.length - 1) { //If last, use first as next side
+            if (property_needs[0].value <= property_standards[0].value) {
                 side_a = property_needs[0].value;
                 console.log("Use needs value");
-            } else{
+            } else {
                 side_a = property_standards[0].value;
                 console.log("Use standard value");
             }
-        } else{ 
-            if(property_needs[i+1].value <= property_standards[i+1].value){
-                side_b = property_needs[i+1].value;
+        } else {
+            if (property_needs[i + 1].value <= property_standards[i + 1].value) {
+                side_b = property_needs[i + 1].value;
                 console.log("Use needs value");
-            } else{
-                side_b = property_standards[i+1].value
+            } else {
+                side_b = property_standards[i + 1].value
                 console.log("Use standard value");
             }
         }
-        score = score + 0.5 * side_a * side_b * Math.sin(40 * Math.PI / 180); 
+        score = score + 0.5 * side_a * side_b * Math.sin(40 * Math.PI / 180);
         console.log("PARTIAL SCORE: " + score);
     }
     console.log("STANDARD SCORE: " + score);
