@@ -28,9 +28,6 @@ d3.csv("/scores-needs0.csv", function (data) {
                 axis: name + "_" + "Job Opportunity",
                 value: d.final_job_score / 100
             },
-
-        
-
             {
                 axis: "Public Transit",
                 value: d.public_transit_score / 100
@@ -102,46 +99,10 @@ d3.csv("/scores-needs0.csv", function (data) {
 //////////////////////// Set-Up ////////////////////////////// 
 ////////////////////////////////////////////////////////////// 
 
-var margin = { top: 70, right: 100, bottom: 100, left: 100 },
+var margin = { top: 90, right: 100, bottom: 100, left: 100 },
     width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-////////////////////////////////////////////////////////////// 
-////////////////////////// Data ////////////////////////////// 
-////////////////////////////////////////////////////////////// 
-/*
-			var data = [
-					  [//iPhone
-						{axis:"Battery Life",value:0.22},
-						{axis:"Brand",value:0.28},
-						{axis:"Contract Cost",value:0.29},
-						{axis:"Design And Quality",value:0.17},
-						{axis:"Have Internet Connectivity",value:0.22},
-						{axis:"Large Screen",value:0.02},
-						{axis:"Price Of Device",value:0.21},
-						{axis:"To Be A Smartphone",value:0.50}			
-					  ],[//Samsung
-						{axis:"Battery Life",value:0.27},
-						{axis:"Brand",value:0.16},
-						{axis:"Contract Cost",value:0.35},
-						{axis:"Design And Quality",value:0.13},
-						{axis:"Have Internet Connectivity",value:0.20},
-						{axis:"Large Screen",value:0.13},
-						{axis:"Price Of Device",value:0.35},
-						{axis:"To Be A Smartphone",value:0.38}
-					  ],[//Nokia Smartphone
-						{axis:"Battery Life",value:0.26},
-						{axis:"Brand",value:0.10},
-						{axis:"Contract Cost",value:0.30},
-						{axis:"Design And Quality",value:0.14},
-						{axis:"Have Internet Connectivity",value:0.22},
-						{axis:"Large Screen",value:0.04},
-						{axis:"Price Of Device",value:0.41},
-						{axis:"To Be A Smartphone",value:0.30}
-					  ]
-                    ];
-                    
-            */
 ////////////////////////////////////////////////////////////// 
 //////////////////// Draw the Chart ////////////////////////// 
 ////////////////////////////////////////////////////////////// 
@@ -154,8 +115,8 @@ var aui_color = d3.scale.ordinal()
     .range(["#909090", "#ff8d00"]);
 
 var radarChartOptionsBig = {
-    w: width,
-    h: height,
+    w: 400,
+    h: 400,
     margin: margin,
     maxValue: 0.5,
     levels: 5,

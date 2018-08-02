@@ -200,12 +200,12 @@ d3.csv("scores-needs1.csv", function (data) {
                 value: d.mobility_need
             },
             {
-                axis: name + "_" + "Health",
-                value: d.health_need
-            },
-            {
                 axis: name + "_" + "Safety",
                 value: d.safety_need
+            },
+            {
+                axis: name + "_" + "Health",
+                value: d.health_need
             },
             {
                 axis: name + "_" + "Education",
@@ -321,12 +321,12 @@ d3.csv("scores-needs2.csv", function (data) {
                 value: d.mobility_need
             },
             {
-                axis: name + "_" + "Health",
-                value: d.health_need
-            },
-            {
                 axis: name + "_" + "Safety",
                 value: safety_need
+            },
+            {
+                axis: name + "_" + "Health",
+                value: d.health_need
             },
             {
                 axis: name + "_" + "Education",
@@ -445,15 +445,13 @@ d3.csv("scores-needs3.csv", function (data) {
                 axis: name + "_" + "Mobility",
                 value: d.mobility_need
             },
-            
-            {
-                axis: name + "_" + "Health",
-                value: d.health_need
-            },
-
             {
                 axis: name + "_" + "Safety",
                 value: d.safety_need
+            },
+            {
+                axis: name + "_" + "Health",
+                value: d.health_need
             },
             {
                 axis: name + "_" + "Education",
@@ -551,7 +549,7 @@ var radarChartOptionsSmall = {
     color: aui_color
 };
 
-function rank_top_five(dataArray, col) {
+function rank_top_five(dataArray, col) { 
     var tempArray = dataArray; //Make copy
     var rank_text = document.getElementsByClassName('column-ranks')[col];
     rank_text.innerHTML = "<strong>Top 5 Properties:<strong>" + "<br>";
@@ -573,11 +571,11 @@ function rank_top_five(dataArray, col) {
 }
 
 //These aren't 100% accurate...
-function rank_top_five_match(dataArray, col) {
+function rank_top_five_match(dataArray, col) { //top 10 for now
     var tempArray = dataArray; //Make copy
     var rank_text = document.getElementsByClassName('column-ranks')[col];
     rank_text.innerHTML = "<strong>Top 5 Match Properties:<strong>" + "<br>";
-    for (var x = 0; x < 5; x++) {
+    for (var x = 0; x < 10; x++) {
         var max = 0;
         var max_position = 0;
         for (var i = 0; i < 18; i++) {
@@ -606,8 +604,11 @@ function calcMatchScore(property_needs, property_standards) {
         var standard = property_standards[i].value; //0-100
         if(need == 0){
             score = score + 1;
+        } else if(standard/need >= 1){
+            //No overflow
+            score++;
         } else{
-            //Allow overflow
+            
             score = score + (standard/need);
         }
         
