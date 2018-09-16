@@ -2,7 +2,7 @@ var counter = -1;
 var dataArray_radar = [];
 var standard_properties = []; //All normal weight properties
 
-d3.csv("scores-needs0.csv", function (data) {
+d3.csv("scores-needs0-old.csv", function (data) {
     var col = document.getElementById('profile_0');
     var dataArray = [];
     counter = -1;
@@ -517,7 +517,6 @@ d3.csv("scores-needs3.csv", function (data) {
     rank_top_five_match(dataArray, 3);
 });
 
-
 /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
 ////////////////////////////////////////////////////////////// 
@@ -540,8 +539,8 @@ var aui_color = d3.scale.ordinal()
     .range(["#909090", "#ff8d00"]);
 
 var radarChartOptionsSmall = {
-    w: 180,
-    h: 180,
+    w: 190,
+    h: 190,
     margin: margin,
     maxValue: 0.5,
     levels: 5,
@@ -549,11 +548,11 @@ var radarChartOptionsSmall = {
     color: aui_color
 };
 
-function rank_top_five(dataArray, col) { 
+function rank_top_five(dataArray, col) { //Rank all, actually 
     var tempArray = dataArray; //Make copy
     var rank_text = document.getElementsByClassName('column-ranks')[col];
-    rank_text.innerHTML = "<strong>Top 5 Properties:<strong>" + "<br>";
-    for (var x = 0; x < 5; x++) {
+    rank_text.innerHTML = "<strong>Overall Property Rankings:<strong>" + "<br>";
+    for (var x = 0; x < 18; x++) {
         var max = 0;
         var max_position = 0;
         for (var i = 0; i < 18; i++) {
@@ -564,18 +563,18 @@ function rank_top_five(dataArray, col) {
                 max_position = i;
             }
         }
-        rank_line = (x + 1) + ". " + tempArray[max_position].name + " " + Math.round(tempArray[max_position].final_property_score) + "<br>";
+        rank_line = (x + 1) + ". " + tempArray[max_position].name + " (" + Math.round(tempArray[max_position].final_property_score) + ")<br>";
         rank_text.innerHTML = rank_text.innerHTML + rank_line;
         tempArray[max_position].final_property_score = 0;
     }
 }
 
 //These aren't 100% accurate...
-function rank_top_five_match(dataArray, col) { //top 10 for now
+function rank_top_five_match(dataArray, col) { //top 18 for now
     var tempArray = dataArray; //Make copy
     var rank_text = document.getElementsByClassName('column-ranks')[col];
-    rank_text.innerHTML = "<strong>Top 5 Match Properties:<strong>" + "<br>";
-    for (var x = 0; x < 10; x++) {
+    rank_text.innerHTML = "<strong>Top Match Properties:<strong>" + "<br>";
+    for (var x = 0; x < 18; x++) {
         var max = 0;
         var max_position = 0;
         for (var i = 0; i < 18; i++) {
@@ -586,18 +585,13 @@ function rank_top_five_match(dataArray, col) { //top 10 for now
                 max_position = i;
             }
         }
-        rank_line = (x + 1) + ". " + tempArray[max_position].name + " " + Math.round(tempArray[max_position].match_score * 100) + "<br>";
+        rank_line = (x + 1) + ". " + tempArray[max_position].name + " (" + Math.round(tempArray[max_position].match_score * 100) + ")<br>";
         rank_text.innerHTML = rank_text.innerHTML + rank_line;
         tempArray[max_position].match_score = 0;
     }
 }
 
 function calcMatchScore(property_needs, property_standards) {
-    //Uncomment for overlap
-    //var max_score = calcMaxScore(property_needs);
-    //var overlap_score = calcOverlapScore(property_needs, property_standards);
-    //console.log("MATCH SCORE: " + overlap_score / max_score);
-    //return overlap_score / max_score;
     var score = 0;
     for(var i = 0; i < property_needs.length; i++){
         var need = property_needs[i].value; //0, .25, .5, .75, 1
@@ -610,8 +604,7 @@ function calcMatchScore(property_needs, property_standards) {
         } else{
             
             score = score + (standard/need);
-        }
-        
+        } 
     }
     //max score is 9
     return score/9;

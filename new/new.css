@@ -1,0 +1,23 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.bar_scores{
+  fill: grey;
+  opacity: 0.5;
+}
+
+.bar_scores:hover{
+  opacity: 0.7;
+}
+
+.bar_needs{
+  fill: blue;
+  opacity: 0.5;
+}
+
+.bar_needs:hover{
+  opacity: 0.7;
+}

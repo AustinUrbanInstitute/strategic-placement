@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <style>
+    .bar1 {
+  }
+  
+  .bar2 {
+  }
+
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+    .xGroup line, .xGroup path{
+    	visibility: hidden;
+		}
+  .tooltip{
+      position      : absolute;
+      text-align    : center;
+      max-width     : 70px;
+      max-height    : 30px;
+      padding       : 8px;
+      border        : none;
+      border-radius : 8px;
+      margin-top    : -30px;
+      font          : 10px sans-serif;
+      background    : black;
+      color         : white;
+      pointer-events: none;
+  }
+  </style>
+</head>
+
+<body>
+
+<div id='container'></div>
+
+<script id='codeExcute'>
+
+// This exmaple is enlighten by http://bl.ocks.org/mbostock/1087001
+
+var url = 'scores-needs0.csv'
+//STORE ALL PROPERTIES AS OBJECTS
+var propertyArray = [];
+
+d3.csv(url, function(error, data){
+    data.forEach(function (d) {
+      //ORGANIZE DATA HERE
+      //d.income = +d.income;
+      //d.income2 = +d.income2;
+      //Store all data in single property object
+
+      //Organize factors with options
+      var final_job_score;
+      var final_edu_score;
+      var final_health_score;
+
+        if(d.final_job_distance = 0){
+                final_job_score = d.final_employment_rate;
+            } else{
+                final_job_score = d.final_job_distance;
+        }
+
+        if(d.final_edu_distance = 0){
+                final_edu_score = d.final_edu_score;
+            } else{
+                final_edu_score = d.final_edu_distance;
+        }
+
+        if(d.final_health_distance = 0){
+                final_health_score = d.final_health_score;
+            } else{
+                final_health_score = d.final_health_distance;
+        }
+
+        var property_scores = {
+            job: final_job_score,
+
+            health: final_health_score,
+
+            edu: final_edu_score,
+
+            public_transit_score: d.public_transit_score,
+
+            safety: d.safety,
+            
+            affordability: d.affordability,
+
+            quiet: d.quiet,
+
+            final_property_score: d.final_property_score
+        }
+
+        var resident_needs = {
+            job_need: d.job_need,
+            edu_need: d.edu_need,
+            health_need: d.health_need,
+            public_transport_need: d.public_transport_need,
+            safety_need: d.safety_need,
+            affordability_need: d.affordability_need,
+            quiet_need: d.quiet_need
+
+        }
+
+        //STORE EVERYTHING IN OVERALL PROPERTY OBJECT
+        var property = {
+            name: d.name,
+            address: d.address,
+            property_scores: property_scores,
+            resident_needs: resident_needs
+        }
+        propertyArray.push(property);
+    });
+
+    //PROPERTY OBJECT TRACKER
+    var property_tracker = 1;
+
+    //MAKE CHART
+    var margin = {top: 65, bottom: 50, left: 50, right: 30}, axisPadding = 0;
+    var Width = 500, Height = 300;
+    var svgWidth = Width + margin.left + margin.right,
+        svgHeight = Height + margin.top + margin.bottom;
+        var maxIncome = 100;
+    //var maxIncome = d3.max(data, function(d){ return d.income; });
+    
+    // define scales and axises
+
+    //ORDER OF FACTORS
+    var domain = ["Safety", "Health", "Affordability", "Jobs", "Education", "Public Transport", "Quietness"];
+    var xScale = d3.scale.ordinal()
+        //.domain(data.map(function(d){ return d.name; }))
+        .domain(domain)
+        .rangeBands([0, Width], 0.0);
+    var yScale = d3.scale.linear()
+        .domain([0, maxIncome])
+        .range([0, Height]);
+    var color = d3.scale.category10();
+    
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .tickSize(0,0)
+        .orient('bottom');
+    var yAxis = d3.svg.axis()
+        .scale(yScale.copy().domain([maxIncome, 0]))
+        .tickSize(6,0)
+        .ticks(5)
+        .orient('left');
+    
+    // create a svg canvas
+    var svg = d3.select('#container')
+        .append('svg')
+        .attr({width: svgWidth, height: svgHeight})
+    
+    
+    // Drawing for axises
+    var xGroup = svg.append('g')
+        .attr('class', 'xGroup')
+        .attr('transform', 'translate(' + [margin.left, margin.top + Height + axisPadding] + ')');
+    xGroup.call(xAxis);
+    styleAxis(xGroup);
+    var yGroup = svg.append('g')
+        .attr('class', 'yGroup')
+        .attr('transform', 'translate(' + [margin.left - axisPadding, margin.top] + ')');
+    yGroup.call(yAxis);
+    styleAxis(yGroup);
+
+
+    // Label layer
+    var label = svg.append('g')
+        .attr('transform', 'translate(' + [margin.left - axisPadding, margin.top] + ')');
+    label.append('text')
+        .text('Income [%]')
+        .attr('transform', 'rotate(-90)')
+        .attr({
+            'text-anchor': 'start',
+            x: -75,
+            y: 20,
+        })
+    label.append('text')
+        .text('Bar Chart with Tooltip')
+        .attr('transform', 'translate(' + [Width / 2, - margin.top / 2] + ')')
+        .attr({
+            'text-anchor': 'middle',
+            'font-size': '1em',
+            fill: 'steelblue',
+        });
+
+    // Drawing for graph body
+    var graph = svg.append('g')
+        .attr('class', 'graph')
+        .attr('transform', 'translate(' + [margin.left, margin.top + Height] + ')');
+    var bars = graph.selectAll('.bar')
+        .data(data)
+        .enter()
+        .append('g')
+        .attr('transform', function(d,i){ return 'translate(' + [xScale(d.country), -1 * yScale(d.income)] + ')'; });
+        
+    var bars2 = graph.selectAll('.bar2')
+        .data(data)
+        .enter()
+        .append('g')
+        .attr('transform', function(d,i){ return 'translate(' + [xScale(d.country), -1 * yScale(d.income2)] + ')'; });
+
+    bars.append('rect')
+        .each(function(d,i){
+            d3.select(this).attr({
+                fill: "black",
+                opacity: 0.1,
+                width: xScale.rangeBand(),
+                height: yScale(d.income),
+                
+            })
+        })
+
+    bars.append('text')
+    .text(function(d){ return d.income; })
+    .each(
+        function(d,i){
+            d3.select(this).attr({
+               fill: 'black',
+              stroke: 'none',
+              x: xScale.rangeBand() / 2,
+                y: +15,
+                width: xScale.rangeBand(),
+                'text-anchor': 'middle',
+             });
+        },
+    )
+    .on('mouseover', mouseover)
+    .on('mousemove', mousemove)
+    .on('mouseout', mouseout);
+    
+
+    /////bar2 stuff
+    bars2.append('rect')
+        .each(function(d,i){           
+            d3.select(this).attr({
+                //fill: "none",
+                //stroke: "black",
+                opacity: 0.4,
+                fill: '#ff8d00',
+                width: xScale.rangeBand(),
+                height: yScale(d.income2),
+            })
+        })
+    //Right most column on top
+
+    bars2.append('text')
+    .text(function(d){ return d.income2; })
+    .each(function(d,i){
+        d3.select(this).attr({
+            //fill: color.range()[i],
+            fill: '#ff8d00',
+            stroke: 'none',
+            x: xScale.rangeBand() / 2,
+            y: +15,
+            'text-anchor': 'middle',
+        });
+    })
+    .on('mouseover', mouseover2)
+    .on('mousemove', mousemove2)
+    .on('mouseout', mouseout2);
+    /////
+    
+    
+    // tooltips
+    var div = d3.select('#container').append('div')
+        .attr('class', 'tooltip')
+        .style('display', 'none');
+    //Bar 1
+    function mouseover(){
+        div.style('display', 'inline');
+        d3.select(this).attr({
+                fill: "red",
+            })
+    }
+    function mousemove(){
+        var d = d3.select(this).data()[0]
+        div
+            .html(d.country + '<hr/>' + d.income)
+            .style('left', (d3.event.pageX - 34) + 'px')
+            .style('top', (d3.event.pageY - 12) + 'px');
+    }
+    function mouseout(){
+        div.style('display', 'none');
+        d3.select(this).attr({
+                fill: "cyan", //back to normal color
+            
+            })
+    }
+    //Bar 2 functions
+    function mouseover2(){
+        div.style('display', 'inline');
+    }
+    function mousemove2(){
+        var d = d3.select(this).data()[0]
+        div
+            .html(d.country + '<hr/>' + d.income2)
+            .style('left', (d3.event.pageX - 34) + 'px')
+            .style('top', (d3.event.pageY - 12) + 'px');
+    }
+    function mouseout2(){
+        div.style('display', 'none');
+    }
+})
+
+function styleAxis(axis){
+    // style path
+    axis.select('.domain').attr({
+        fill: 'none',
+        stroke: '#888',
+        'stroke-width': 1
+    });
+    // style tick
+    axis.selectAll('.tick line').attr({
+        stroke: '#000',
+        'stroke-width': 1,
+    })
+}
+
+</script>
+</body>
