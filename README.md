@@ -14,7 +14,7 @@ In Commond Prompt or Terminal:
 6. To see data visualizations, open `needs-comparisons.html` in localhost
 
 ### Example of resident-property match
-![chalmers property match](example-pics\chalmers-match.JPG)
+![chalmers property match](/example-pics/chalmers-match.JPG)
 
 ## UPDATE: Project still in progress
 Currently working on a new bar graph visualization method to improve accuracy of visualization display. To see new progress, check out `barchart.html` in `new` folder
