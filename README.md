@@ -13,8 +13,18 @@ In Commond Prompt or Terminal:
 5. Open [http://localhost:8080/](http://localhost:8080/)
 6. To see data visualizations, open `needs-comparisons.html` in localhost
 
+- Data available on (Google Sheets)[https://docs.google.com/spreadsheets/d/10pia1KXaKaT2KSeP93Vono1SGRbhOPeW71wLdyu9PLg/edit?usp=sharing]
+### Sources
+- United States Census Bureau
+- Longitudinal Employer-Household Dynamics
+- Yelp
+- Walk Score
+- Niche.com
+- AreaVibes.com
+
 ### Example of resident-property match
 ![chalmers property match](/example-pics/chalmers-match.JPG)
 
 ## UPDATE: Project still in progress
 Currently working on a new bar graph visualization method to improve accuracy of visualization display. To see new progress, check out `barchart.html` in `new` folder
+- New data available on [Google Sheets](https://docs.google.com/spreadsheets/d/1HrSoPviefLvSqFhyPWWdX28v1bBHeqcqJtILdSzcG5g/edit?usp=sharing)
