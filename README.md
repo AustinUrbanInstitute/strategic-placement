@@ -13,7 +13,7 @@ In Commond Prompt or Terminal:
 5. Open [http://localhost:8080/](http://localhost:8080/)
 6. To see data visualizations, open `needs-comparisons.html` in localhost
 
-- Data available on (Google Sheets)[https://docs.google.com/spreadsheets/d/10pia1KXaKaT2KSeP93Vono1SGRbhOPeW71wLdyu9PLg/edit?usp=sharing]
+- Data available on [Google Sheets](https://docs.google.com/spreadsheets/d/10pia1KXaKaT2KSeP93Vono1SGRbhOPeW71wLdyu9PLg/edit?usp=sharing)
 ### Sources
 - United States Census Bureau
 - Longitudinal Employer-Household Dynamics
