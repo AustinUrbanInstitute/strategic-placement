@@ -1,48 +1,92 @@
 d3.csv("scores-needs0.csv", function (data) {
+  //Store all property objects here
+  var properties = [];
+
+  var factors_array = ['Safety', 'Health', 'Affordability', 'Jobs', 'K-12 Edu', 'Public Transit', 'Quietness']
+
   data.forEach(function (d, i) { // For each property...
-    // Determine exact factors first
-    var factors_array = ['Safety', 'Health', 'Affordability', 'Jobs', 'K-12 Edu', 'Public Transit', 'Quietness']
+    // All needs and scores var
+    var safety_need = d.safety_need;
+    var health_need = d.health_need;
+    var afford_need = d.affordability_need;
+    var job_need = d.job_need;
+    var edu_need = d.edu_need;
+    var transit_need = d.public_transport_need;
+    var quiet_need = d.quiet_need;
+
+    var safety_score = d.safety;
+    var health_score = 0; //SPECIAL
+    var afford_score = d.affordability;
+    var job_score = 0; //SPECIAL
+    var edu_score = 0; //SPECIAL
+    var transit_score = d.public_transit_score;
+    var quiet_score = d.quiet;
+
+    // For SPECIAL scores
     if(d.final_job_distance == 0 || d.final_job_distance == null){
       // Calc job by employment opp
-      factors_array[4] = 'Job Opportunity'
+      factors_array[4] = 'Job Opportunity';
+      job_score = d.final_employment_score;
     } else{
       // Calc job by distance
-      factors_array[4] = 'Job Distance'
+      factors_array[4] = 'Job Distance';
+      job_score = d.final_job_distance;
     }
 
     if(d.final_health_distance == 0 || d.final_health_distance == null){
       // Calc health by health quality
-      factors_array[2] = 'Healthcare Quality'
+      factors_array[2] = 'Healthcare Quality';
+      health_score = d.final_health_score;
     } else{
       // Calc health by distance
-      factors_array[2] = 'Healthcare Distance'
+      factors_array[2] = 'Healthcare Distance';
+      health_score = d.final_health_distance;
     }
 
     if(d.final_edu_distance == 0 || d.final_edu_distance == null){
       // Calc health by health quality
-      factors_array[5] = 'K-12 Edu Quality'
+      factors_array[5] = 'K-12 Edu Quality';
+      edu_score = d.final_edu_score;
     } else{
       // Calc health by distance
-      factors_array[5] = 'K-12 Edu Distance'
+      factors_array[5] = 'K-12 Edu Distance';
+      edu_score = d.final_edu_distance;
     }
 
-    // Make array of factor scores
+    // Make array of factor scores ('Safety', 'Health', 'Affordability', 'Jobs', 'K-12 Edu', 'Public Transit', 'Quietness')
     var dataArray_scores = [];
-    dataArray_scores.add(d.)
+    dataArray_scores.push(safety_score);
+    dataArray_scores.push(health_score);
+    dataArray_scores.push(afford_score);
+    dataArray_scores.push(job_score);
+    dataArray_scores.push(edu_score);
+    dataArray_scores.push(transit_score);
+    dataArray_scores.push(quiet_score);
 
     // Make array of needs
+    var dataArray_needs = [];
+    dataArray_needs.push(safety_need);
+    dataArray_needs.push(health_need);
+    dataArray_needs.push(afford_need);
+    dataArray_needs.push(job_need);
+    dataArray_needs.push(edu_need);
+    dataArray_needs.push(transit_need);
+    dataArray_needs.push(quiet_need);
 
     var property = {
       name: d.name,
       address: d.address,
-      dataArray_scores: ???,
-      dataArray_needs: ???
+      dataArray_scores: dataArray_scores,
+      dataArray_needs: dataArray_needs
     }
+
     console.log(property);
-/*
+    properties.push(property);
+
+    // CREATE DATA VIZ
     // Create data array of values to visualize
-    var dataArray_scores = [23, 13, 21, 14, 50, 15, 10];
-    var dataArray_needs = [3, 43, 2, 4, 12, 53, 20];
+    var scores = properties[0].dataArray_scores;
+    var needs = properties[0].dataArray_needs;
 
     // Create variable for the SVG
     var svg = d3.select("body").append("svg")
@@ -50,14 +94,14 @@ d3.csv("scores-needs0.csv", function (data) {
     .attr("width","100%");
 
     // Select, append to SVG, and add attributes to rectangles for bar chart
-    var bar_height_mult = 6;
+    var bar_height_mult = 3;
     var margin = 25;
-    var bar_width = 80;
+    var bar_width = 60;
     var graph_height = 100 * bar_height_mult;
-    var graph_width = bar_width*dataArray_needs.length;
+    var graph_width = bar_width*needs.length;
 
     svg.selectAll("rect_scores")
-    .data(dataArray_scores)
+    .data(scores)
     .enter().append("rect")
     .attr("class", "bar_scores")
     .attr("height", function(d, i) {return (d * bar_height_mult)})
@@ -66,7 +110,7 @@ d3.csv("scores-needs0.csv", function (data) {
     .attr("y", function(d, i) {return graph_height - (d * bar_height_mult)});
 
     svg.selectAll("rect_needs")
-    .data(dataArray_needs)
+    .data(needs)
     .enter().append("rect")
     .attr("class", "bar_needs")
     .attr("height", function(d, i) {return (d * bar_height_mult)})
@@ -76,7 +120,7 @@ d3.csv("scores-needs0.csv", function (data) {
 
     // Select, append to SVG, and add attributes to text
     svg.selectAll("text")
-    .data(dataArray_scores)
+    .data(scores)
     .enter().append("text")
     .text(function(d) {return d})
     .attr("class", "text")
@@ -84,11 +128,9 @@ d3.csv("scores-needs0.csv", function (data) {
     .attr("y", function(d, i) {return graph_height - (d * bar_height_mult)});
 
     // Axes
-    var x = d3.scalePoint()
-    // Fix order
-    //.domain(['Safety', 'Jobs', 'Public Transit', 'K-12 Education', 'Healthcare', 'Quietness', 'Affordability'])
-    .domain(factors_array)
-    .range([graph_width * (1/(dataArray_needs.length * 2)), graph_width * (dataArray_needs.length*2-1)/(dataArray_needs.length*2)]);
+    var x = d3.scaleLinear()
+    .domain([1, 7])
+    .range([graph_width * (1/(needs.length * 2)), graph_width * (needs.length*2-1)/(needs.length*2)]);
 
     var y = d3.scaleLinear()
     .domain([0, 100])
@@ -111,6 +153,6 @@ d3.csv("scores-needs0.csv", function (data) {
     .attr("transform", "translate(" + margin + "," + 0 + ")")
     .attr("class","axis")
     .call(yAxis);
-*/
-});
+
+  });
 });
