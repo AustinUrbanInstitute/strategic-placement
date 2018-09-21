@@ -85,13 +85,8 @@ d3.csv("scores-needs0.csv", function (data) {
 
     // CREATE DATA VIZ
     // Create data array of values to visualize
-    var scores = properties[0].dataArray_scores;
-    var needs = properties[0].dataArray_needs;
-
-    // Create variable for the SVG
-    var svg = d3.select("body").append("svg")
-    .attr("height","100%")
-    .attr("width","100%");
+    var scores = properties[i].dataArray_scores;
+    var needs = properties[i].dataArray_needs;
 
     // Select, append to SVG, and add attributes to rectangles for bar chart
     var bar_height_mult = 3;
@@ -99,6 +94,22 @@ d3.csv("scores-needs0.csv", function (data) {
     var bar_width = 60;
     var graph_height = 100 * bar_height_mult;
     var graph_width = bar_width*needs.length;
+    var graph_margin = 50;
+
+    // Create variable for the SVG
+    var svg = d3.select("body").append("svg")
+    .attr("height",graph_height + graph_margin*2) //100%
+    .attr("width",'100%') //100%
+    .append("g")
+    .attr("transform", "translate(" + graph_margin + "," + graph_margin + ")");
+
+    // Title
+    svg.append("text")
+    .attr("x", (graph_width / 2))
+    .attr("y", 0 - graph_margin/2)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .text(d.name);
 
     svg.selectAll("rect_scores")
     .data(scores)
@@ -128,20 +139,22 @@ d3.csv("scores-needs0.csv", function (data) {
     .attr("y", function(d, i) {return graph_height - (d * bar_height_mult)});
 
     // Axes
-    var x = d3.scaleLinear()
+    var x = d3.scale.linear() //scaleLinear()
     .domain([1, 7])
     .range([graph_width * (1/(needs.length * 2)), graph_width * (needs.length*2-1)/(needs.length*2)]);
 
-    var y = d3.scaleLinear()
+    var y = d3.scale.linear()
     .domain([0, 100])
     .range([graph_height,0]);
 
-    var xAxis = d3.axisBottom()
+    var xAxis = d3.svg.axis()
     .scale(x)
+    .orient("bottom")
     .ticks(1);
 
-    var yAxis = d3.axisLeft()
+    var yAxis = d3.svg.axis()
     .scale(y)
+    .orient('left')
     .ticks(4);
 
     svg.append("g")
