@@ -35,11 +35,11 @@ d3.csv("scores-needs0.csv", function (data) {
 
     if(d.final_health_distance == 0 || d.final_health_distance == null){
       // Calc health by health quality
-      factors_array[2] = 'Healthcare Quality';
+      factors_array[1] = 'Healthcare Quality';
       health_score = d.final_health_score;
     } else{
       // Calc health by distance
-      factors_array[2] = 'Healthcare Distance';
+      factors_array[1] = 'Healthcare Distance';
       health_score = d.final_health_distance;
     }
 
@@ -82,6 +82,7 @@ d3.csv("scores-needs0.csv", function (data) {
 
     console.log(property);
     properties.push(property);
+    console.log(factors_array);
 
     // CREATE DATA VIZ
     // Create data array of values to visualize
@@ -139,9 +140,9 @@ d3.csv("scores-needs0.csv", function (data) {
     .attr("y", function(d, i) {return graph_height - (d * bar_height_mult)});
 
     // Axes
-    var x = d3.scale.linear() //scaleLinear()
-    .domain([1, 7])
-    .range([graph_width * (1/(needs.length * 2)), graph_width * (needs.length*2-1)/(needs.length*2)]);
+    var x = d3.scale.ordinal() //scaleLinear()
+    .domain(factors_array)
+    .rangePoints([graph_width/14, graph_width]);
 
     var y = d3.scale.linear()
     .domain([0, 100])
@@ -150,7 +151,7 @@ d3.csv("scores-needs0.csv", function (data) {
     var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-    .ticks(1);
+    .ticks(7);
 
     var yAxis = d3.svg.axis()
     .scale(y)
