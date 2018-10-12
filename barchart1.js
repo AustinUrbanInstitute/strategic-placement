@@ -1,6 +1,6 @@
-var a = 0;
 
-d3.csv("scores-needs" + a + ".csv", function (data) {
+
+d3.csv("scores-needs1.csv", function (data) {
   //Store all property objects here
   var properties = [];
 
@@ -107,8 +107,8 @@ d3.csv("scores-needs" + a + ".csv", function (data) {
     var graph_margin = 50;
 
     // Create variable for the SVG
-    var col = document.getElementById("column" + a);
-    var svg = d3.select(col).append("svg")
+    var col1 = document.getElementById("column1");
+    var svg = d3.select(col1).append("svg")
     .attr("height",graph_height + graph_margin*2) //100%
     .attr("width",'100%') //100%
     .append("g")

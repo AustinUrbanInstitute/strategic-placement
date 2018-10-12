@@ -1,0 +1,50 @@
+body{
+  width: auto;
+}
+
+.column {
+    min-width: 24.5%;
+    min-height: 300px;
+    background-color: blue;
+    display: inline-block;
+}
+
+.chart-unit {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.column-title {
+    position: fixed;
+    text-align: center;
+    background-color: white;
+    width: 25vw;
+    padding: 15px;
+    margin-top: -20px;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 270px;
+    background-color: #f7f7f7;
+    color: #000000;
+    text-align: left;
+    padding: 10px;
+    font-size: 17px;
+
+    /* Position the tooltip */
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 30%;
+    margin-left: -60px;
+}
+
+.column-title:hover .tooltiptext {
+    visibility: visible;
+}
+
+.column-ranks{
+    margin-bottom: 100px;
+}

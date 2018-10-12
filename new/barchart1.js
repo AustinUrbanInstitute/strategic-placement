@@ -1,4 +1,4 @@
-var a = 0;
+var a = 1;
 
 d3.csv("scores-needs" + a + ".csv", function (data) {
   //Store all property objects here

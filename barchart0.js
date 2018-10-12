@@ -91,7 +91,6 @@ d3.csv("scores-needs" + a + ".csv", function (data) {
 
     console.log(property);
     properties.push(property);
-    console.log(factors_array);
 
     // CREATE DATA VIZ
     // Create data array of values to visualize
@@ -107,8 +106,9 @@ d3.csv("scores-needs" + a + ".csv", function (data) {
     var graph_margin = 50;
 
     // Create variable for the SVG
-    var col = document.getElementById("column" + a);
-    var svg = d3.select(col).append("svg")
+    var unit = document.getElementById("unit_" + i);
+    console.log("Displaying Unit " + i);
+    var svg = d3.select(unit).append("svg")
     .attr("height",graph_height + graph_margin*2) //100%
     .attr("width",'100%') //100%
     .append("g")
