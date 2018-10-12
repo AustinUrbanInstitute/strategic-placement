@@ -98,12 +98,20 @@ function graph(profile_counter){
       // Create data array of values to visualize
       var scores = properties[i].dataArray_scores;
       var needs = properties[i].dataArray_needs;
+      var name = properties[i].name;
+
+      //Add dummy repeats
+      scores.push(scores[scores.length-1]);
+      console.log(name + " SCORES: " + scores);
+      needs.push(needs[needs.length-1]);
+      console.log(name + " NEEDS: " + needs);
+
       //8th element repeat of last, necessary for this to work!!!
       var factors = ['Safety', 'Health', 'Affordability', 'Jobs', 'K-12 Edu', 'Public Transit', 'Quietness', ' '];
 
       var needs_plot = {
         x: factors,
-        y: [100, 25, 60, 18, 26, 90, 100, 100],
+        y: needs,
         mode: 'lines+markers',
         name: 'Resident Need',
         line: {shape: 'hv', color: 'rgba(255, 141, 0, 0.7)'},
@@ -115,7 +123,7 @@ function graph(profile_counter){
 
       var scores_plot = {
         x: factors,
-        y: [100, 75, 100, 50, 100, 50, 75, 75],
+        y: scores,
         mode: 'lines+markers',
         name: 'Property Score',
         line: {shape: 'hv', color: 'rgba(9, 9, 9, 0.7)'},
