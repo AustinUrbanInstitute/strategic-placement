@@ -26,5 +26,5 @@ In Commond Prompt or Terminal:
 ![chalmers property match](/example-pics/chalmers-match.JPG)
 
 ## UPDATE: Project still in progress
-Currently working on a new bar graph visualization method to improve accuracy of visualization display. To see new progress, check out `barchart.html` in `new` folder
+Currently working on a new bar graph visualization method to improve accuracy of visualization display. To see new progress, check out `index.html` in `new` folder
 - New data available on [Google Sheets](https://docs.google.com/spreadsheets/d/1HrSoPviefLvSqFhyPWWdX28v1bBHeqcqJtILdSzcG5g/edit?usp=sharing)
