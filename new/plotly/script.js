@@ -7,6 +7,7 @@ function graph(profile_counter){
   //Put all properties in file into data stuff
   d3.csv("scores-needs" + profile_counter + ".csv", function (data) {
     //Store all property objects here
+
     data.forEach(function (d, i) { // For each property...
       // All needs and scores var
       var safety_need = d.safety_need;
@@ -96,13 +97,7 @@ function graph(profile_counter){
 
       // Create data array of values to visualize
       var scores = properties[i].dataArray_scores;
-      var needs = [];
-      // Check if graphic main property graph or profile graphic
-      if(profile_counter == 0){
-        needs = [0, 0, 0, 0, 0, 0, 0, 0];
-      } else{
-        needs = properties[i].dataArray_needs;
-      }
+      var needs = properties[i].dataArray_needs;
       var name = properties[i].name;
 
       //Add dummy repeats
@@ -140,36 +135,31 @@ function graph(profile_counter){
       var resident_property = [scores_plot, needs_plot,];
 
       var layout = {
+        title: 'HIIII',
         autosize: false,
         width: 300,
         height: 500,
         margin: {
+          t: 100,
           l: 50,
           r: 50,
           b: 90
         },
         /*legend: {
-        y: 0.5,
-        traceorder: 'reversed',
-        font: {size: 16},
-        yref: 'paper',
-      }*/
-      showlegend: false
-    }
+          y: 0.5,
+          traceorder: 'reversed',
+          font: {size: 16},
+          yref: 'paper',
+        }*/
+        showlegend: false
+      };
+      unit_counter++;
+      console.log("GRAPHING: " + unit_counter + " PROPERTY: " + properties[i].name + " PROFILE: " + profile_counter);
 
-    if(profile_counter == 0){
-      //HAVE TO BE SAME AS ABOVE LAYOUT BUT W/ DIFF TITLE
-      layout.title =  name + '<br>Overall: ' + Math.round(properties[i].property_score);
-    } else{
-      layout.title = name + '<br>Match: ' + Math.round(properties[i].match_score);
-    }
-    unit_counter++;
-    console.log("GRAPHING: " + unit_counter + " PROPERTY: " + properties[i].name + " PROFILE: " + profile_counter);
+      Plotly.newPlot('unit_' + unit_counter, resident_property, layout);
 
-    Plotly.newPlot('unit_' + unit_counter, resident_property, layout);
-
+    });
   });
-});
 }
 
 function calcMatchScore(property_needs, property_scores){
@@ -177,11 +167,6 @@ function calcMatchScore(property_needs, property_scores){
   for(var i = 0; i < property_needs.length; i++){
     var need = property_needs[i]; //0, .25, .5, .75, 1
     var factor_score = property_scores[i]; //0-100
-    //Loop through arrays to round scores
-    for(var a = 0; a < need.length; a++){
-      need[a] = Math.round(need[a]);
-      factor_score[a] = Math.round(factor_score[a]);
-    }
     if(need == 0){
       score++;
     } else if(factor_score/need >= 1){
